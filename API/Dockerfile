@@ -1,12 +1,11 @@
-# Use the official .NET image
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["API/API.csproj", "./"]
-RUN dotnet restore "./API.csproj"
+COPY ["/API.csproj", "API/"]
+RUN dotnet restore "API/API.csproj"
 COPY . .
 WORKDIR "/src/API"
 RUN dotnet build -c Release -o /app/build
